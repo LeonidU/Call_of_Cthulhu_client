@@ -1,0 +1,263 @@
+:root {
+  /* Eldritch palette */
+  --bg-void: #060d08;
+  --bg-deep: #0c1a10;
+  --bg-surface: #132218;
+  --bg-elevated: #1a2e22;
+  --bg-card: #1e3528;
+
+  --text-parchment: #d4c5a0;
+  --text-faded: #9e937a;
+  --text-dim: #6b6352;
+
+  --gold: #c4a265;
+  --gold-bright: #dbb978;
+  --gold-dim: #8a7244;
+
+  --eldritch-green: #3a7a4f;
+  --eldritch-glow: #4aff7a20;
+
+  --blood: #8b2020;
+  --blood-bright: #c0392b;
+
+  --sanity-blue: #3a6a8a;
+
+  --border: #2a3e30;
+  --border-glow: #3a7a4f55;
+
+  /* Typography */
+  --font-display: 'Cinzel', serif;
+  --font-body: 'Crimson Text', serif;
+  --font-mono: 'IBM Plex Mono', monospace;
+
+  /* Spacing */
+  --radius: 4px;
+  --radius-lg: 8px;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body, #root {
+  height: 100%;
+}
+
+body {
+  font-family: var(--font-body);
+  font-size: 17px;
+  color: var(--text-parchment);
+  background: var(--bg-void);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Subtle noise texture overlay */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 9999;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  color: var(--gold);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+
+a {
+  color: var(--gold);
+  text-decoration: none;
+}
+a:hover {
+  color: var(--gold-bright);
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-deep);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--eldritch-green);
+}
+
+/* ── Form Elements ────────────────────────────── */
+
+input, select, textarea {
+  font-family: var(--font-body);
+  font-size: 16px;
+  color: var(--text-parchment);
+  background: var(--bg-deep);
+  border: 1px solid var(--border);
+  padding: 10px 14px;
+  border-radius: var(--radius);
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  width: 100%;
+}
+input:focus, select:focus, textarea:focus {
+  border-color: var(--gold-dim);
+  box-shadow: 0 0 0 2px var(--eldritch-glow);
+}
+input::placeholder {
+  color: var(--text-dim);
+}
+
+label {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-faded);
+  margin-bottom: 6px;
+}
+
+/* ── Buttons ──────────────────────────────────── */
+
+.btn {
+  font-family: var(--font-display);
+  font-size: 14px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 10px 24px;
+  border: 1px solid var(--gold-dim);
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: all 0.2s;
+  background: transparent;
+  color: var(--gold);
+}
+.btn:hover {
+  background: var(--gold-dim);
+  color: var(--bg-void);
+  border-color: var(--gold);
+}
+.btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--gold-dim), var(--gold));
+  color: var(--bg-void);
+  border: none;
+  font-weight: 600;
+}
+.btn-primary:hover {
+  background: linear-gradient(135deg, var(--gold), var(--gold-bright));
+}
+
+.btn-danger {
+  border-color: var(--blood);
+  color: var(--blood-bright);
+}
+.btn-danger:hover {
+  background: var(--blood);
+  color: var(--text-parchment);
+}
+
+.btn-sm {
+  font-size: 11px;
+  padding: 6px 14px;
+}
+
+/* ── Layout ───────────────────────────────────── */
+
+.page-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 20px;
+}
+
+.card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 32px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+}
+
+.field {
+  margin-bottom: 18px;
+}
+
+.error-msg {
+  color: var(--blood-bright);
+  font-size: 14px;
+  margin-top: 8px;
+}
+
+.success-msg {
+  color: var(--eldritch-green);
+  font-size: 14px;
+  margin-top: 8px;
+}
+
+/* ── Divider ──────────────────────────────────── */
+
+.divider {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 24px 0;
+}
+
+/* ── Grid helpers ─────────────────────────────── */
+
+.grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.grid-3 {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 12px;
+}
+
+.grid-4 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+
+/* ── Animations ───────────────────────────────── */
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.fade-in {
+  animation: fadeIn 0.4s ease-out;
+}
+
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 8px var(--eldritch-glow); }
+  50% { box-shadow: 0 0 20px var(--eldritch-glow), 0 0 40px var(--eldritch-glow); }
+}
+
+/* ── Dice result flash ────────────────────────── */
+
+.dice-critical { color: #ffd700; text-shadow: 0 0 12px #ffd70088; }
+.dice-extreme { color: #4aff7a; }
+.dice-hard { color: var(--gold-bright); }
+.dice-regular { color: var(--text-parchment); }
+.dice-fail { color: var(--text-dim); }
+.dice-fumble { color: var(--blood-bright); text-shadow: 0 0 12px #c0392b88; }
